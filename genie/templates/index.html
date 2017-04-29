@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.1.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://openlayers.org/en/v4.1.0/build/ol.js" type="text/javascript"></script>
 </head>
 <body>
  Abhinandan is the greatest developer on earth
+<div id="map" class="map"></div>
+    <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+            
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([37.41, 8.82]),
+          zoom: 4
+        })
+      });
+
+      var wms = new OpenLayers.Layer.WMS(
+        "Population Density",
+        "http://sedac.ciesin.columbia.edu/geoserver/wms",
+        {layers: 'gpw-v3:gpw-v3-population-density_2000'}
+      );
+    </script>
 </body>
 </html>
