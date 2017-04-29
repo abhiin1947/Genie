@@ -1,0 +1,28 @@
+html {
+    font-family: 'Lora', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
+}
+
+.btn {
+    background-color: #fff;
+    border: 1px solid #95989A;
+    border-radius: 5px;
+    color: #CEE182;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #CEE182;
+    border: 1px solid #95989A;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.grey {
+    color: #77817F;
+}
+
+.pf {
+    font-family: 'Playfair Display', serif;
+}
