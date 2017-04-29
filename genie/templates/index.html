@@ -22,19 +22,13 @@
           new ol.layer.Tile({
             source: new ol.source.OSM()
           }),
-            
+
         ],
         view: new ol.View({
           center: ol.proj.fromLonLat([37.41, 8.82]),
           zoom: 4
         })
       });
-
-      var wms = new OpenLayers.Layer.WMS(
-        "Population Density",
-        "http://sedac.ciesin.columbia.edu/geoserver/wms",
-        {layers: 'gpw-v3:gpw-v3-population-density_2000'}
-      );
     </script>
 </body>
 </html>
