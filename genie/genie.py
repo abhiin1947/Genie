@@ -11,6 +11,9 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
+@app.route('/map_locations')
+def map_locations():
+    return render_template('map-locations.html')
 
 @app.route('/get_mosquitos')
 def mosquitos():
