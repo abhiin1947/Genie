@@ -21,8 +21,9 @@
         function initMap() {
             customIcon = {
                 url: "static/dna-01.png",
-                scaledSize: new google.maps.Size(20, 20)
+                scaledSize: new google.maps.Size(40, 40)
             };
+
             $.getJSON("/plots", function (data) {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 0, lng: 0},
@@ -372,16 +373,17 @@
 
                 $.each(data["plots"], function (index, value) {
                     var marker = new google.maps.Marker({
-						icon: customIcon,
+                        icon: customIcon,
                         position: {lat: value["latitude"], lng: value["longitude"]},
                         map: map,
                         title: value["text"]["content"]
                     });
 
-                    marker.addListener('click', function() {
+
+                    marker.addListener('click', function () {
                         console.log(value["id"]);
-                        console.log("/relatives/closest/3/"+value["id"]);
-                        $.getJSON("/relatives/closest/3/"+value["id"], function (data) {
+                        console.log("/relatives/closest/3/" + value["id"]);
+                        $.getJSON("/relatives/closest/3/" + value["id"], function (data) {
                             console.log(data);
                         });
                     });
@@ -401,6 +403,9 @@
         <div class="embed embed-4by3">
             <div id="map" class="map embed-item absolute pin-c"></div>
         </div>
+          <div id="floating-panel">
+      <input onclick="" type=button value="Reset">
+    </div>
     </div>
 </div>
 
