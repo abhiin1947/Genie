@@ -29,6 +29,8 @@ html {
 
 .green {
     background-color: #CEE182;
+    border: 1px solid #CEE182;
+    border-radius: 5px;
 }
 
 .circular-btn {
