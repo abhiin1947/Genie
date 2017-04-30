@@ -52,3 +52,10 @@ html {
     margin-right: auto;
 }
 
+a:focus {
+    outline: 0;
+}
+
+btn:focus {
+    outline: 0;
+}
