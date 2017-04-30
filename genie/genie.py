@@ -48,6 +48,13 @@ def find_by_nucleotide(nucleotide):
 
 
 def dict_record(x):
+    a = ""
+    if "specimen_details" in x and "sex" in x["specimen_details"]:
+        a += "Sex" + ("Female" if x["specimen_details"]["sex"] == "F" else "Male") + "\n"
+
+    a += ("Site: " + x["collection_event"]["exactsite"] + "\n") if "exactsite" in x["collection_event"] else ""
+    a += "Genus: Aedes \n"
+
     return {
         "id": str(x["_id"]),
         "latitude": float(x["collection_event"]["coordinates"]["lat"]),
@@ -57,6 +64,7 @@ def dict_record(x):
             "content": x["processid"]
         },
         "nucleotide": x["sequences"]["sequence"]["nucleotides"],
+        "info": a,
         "href": "http://www.boldsystems.org/index.php/Public_BarcodeCluster?clusteruri=" + x["bin_uri"]
     }
 

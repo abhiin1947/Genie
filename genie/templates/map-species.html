@@ -226,6 +226,16 @@
                         title: value["text"]["content"]
                     });
                     markers.push(m);
+
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: value["info"]
+                    });
+
+                    google.maps.event.addListener(m, 'mouseover', function () {
+                        infoWindow.open(map, m);
+                    });
+
                     return m;
                 }
 
