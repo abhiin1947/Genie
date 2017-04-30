@@ -15,11 +15,6 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route('/map_locations')
-def map_locations():
-    return render_template('map-locations.html')
-
-
 @app.route('/map_species')
 def map_species():
     return render_template('map-species.html')
