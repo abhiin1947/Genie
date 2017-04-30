@@ -18,10 +18,18 @@
     <script type="text/javascript">
         var plots = {};
         var customIcon = {};
+        var markers = [];
         function initMap() {
             customIcon = {
                 url: "static/dna-01.png",
                 scaledSize: new google.maps.Size(20, 20)
+            };
+
+            google.maps.Map.prototype.clearOverlays = function () {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
+                markers.length = 0;
             };
             $.getJSON("/plots", function (data) {
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -369,20 +377,36 @@
                     ]
                 });
 
-
-                $.each(data["plots"], function (index, value) {
-                    var marker = new google.maps.Marker({
-						icon: customIcon,
+                function showMarker(value) {
+                    var m = new google.maps.Marker({
                         position: {lat: value["latitude"], lng: value["longitude"]},
                         map: map,
                         title: value["text"]["content"]
                     });
+                    markers.push(m);
+                    return m;
+                }
 
-                    marker.addListener('click', function() {
-                        console.log(value["id"]);
-                        console.log("/relatives/closest/3/"+value["id"]);
-                        $.getJSON("/relatives/closest/3/"+value["id"], function (data) {
+                function showCustomMarker(value) {
+                    var m = new google.maps.Marker({
+                        icon: customIcon,
+                        position: {lat: value["latitude"], lng: value["longitude"]},
+                        map: map,
+                        title: value["text"]["content"]
+                    });
+                    markers.push(m);
+                    return m;
+                }
+
+                $.each(data["plots"], function (index, value) {
+                    showMarker(value).addListener('click', function () {
+                        $.getJSON("/relatives/closest/15/" + value["id"], function (data) {
                             console.log(data);
+                            map.clearOverlays();
+                            $.each(data["closest"], function (index, value) {
+                                showCustomMarker(value);
+                            });
+                            showMarker(data["main"]);
                         });
                     });
                 });
