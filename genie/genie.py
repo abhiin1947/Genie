@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import jsonify
 import urllib2
 import xmltodict
 import json
@@ -15,12 +16,13 @@ def hello_world():
 def map_locations():
     return render_template('map-locations.html')
 
+
 @app.route('/get_mosquitos')
 def mosquitos():
     response = urllib2.urlopen('http://www.boldsystems.org/index.php/API_Public/combined?bin=BOLD:AAA5125&format=xml')
     res_string = response.read()
     result = xmltodict.parse(res_string)
-    return json.dumps(result)
+    return jsonify(result)
 
 
 @app.after_request
