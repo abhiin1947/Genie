@@ -19,17 +19,23 @@
         var plots = {};
         var customIcon = {};
         var customIcon2 = {};
+        var customIcon3 = {};
         var markers = [];
         var map;
         function initMap() {
             customIcon = {
                 url: "static/dna-01.png",
-                scaledSize: new google.maps.Size(20, 20)
+                scaledSize: new google.maps.Size(15, 15)
             };
 
             customIcon2 = {
                 url: "static/dna-02.png",
-                scaledSize: new google.maps.Size(20, 20)
+                scaledSize: new google.maps.Size(15, 15)
+            };
+
+            customIcon3 = {
+                url: "static/dna-03.png",
+                scaledSize: new google.maps.Size(15, 15)
             };
 
             google.maps.Map.prototype.clearOverlays = function () {
@@ -234,13 +240,32 @@
                     return m;
                 }
 
+                function showCustomMarker2(value) {
+                    var m = new google.maps.Marker({
+                        icon: customIcon3,
+                        position: {lat: value["latitude"], lng: value["longitude"]},
+                        map: map,
+                        title: value["text"]["content"]
+                    });
+                    markers.push(m);
+                    return m;
+                }
+
                 $.each(data["plots"], function (index, value) {
                     showMarker(value).addListener('click', function () {
-                        $.getJSON("/relatives/closest/15/" + value["id"], function (data) {
+                        map.clearOverlays();
+                        $.getJSON("/relatives/closest/10/" + value["id"], function (data) {
                             console.log(data);
-                            map.clearOverlays();
                             $.each(data["closest"], function (index, value) {
                                 showCustomMarker(value);
+                            });
+                            showMarker(data["main"]);
+                        });
+
+                        $.getJSON("/relatives/furthest/5/" + value["id"], function (data) {
+                            console.log(data);
+                            $.each(data["furthest"], function (index, value) {
+                                showCustomMarker2(value);
                             });
                             showMarker(data["main"]);
                         });
