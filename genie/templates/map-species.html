@@ -365,10 +365,18 @@
                 });
 
                 $.each(data["plots"], function (index, value) {
-                    new google.maps.Marker({
+                    var marker = new google.maps.Marker({
                         position: {lat: value["latitude"], lng: value["longitude"]},
                         map: map,
                         title: value["text"]["content"]
+                    });
+
+                    marker.addListener('click', function() {
+                        console.log(value["id"]);
+                        console.log("/relatives/closest/3/"+value["id"]);
+                        $.getJSON("/relatives/closest/3/"+value["id"], function (data) {
+                            console.log(data);
+                        });
                     });
                 });
             });

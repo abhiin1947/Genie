@@ -17,22 +17,22 @@ def print_name(record):
 if __name__ == "__main__":
     n = []
     l = list(collection.aggregate([
-        {"$group": {"_id": "$bin_uri", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
-    ]))[0]
+            {"$group": {"_id": "$bin_uri", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}}
+        ]))[0]
 
-    largest_bin = collection.find({"bin_uri": l["bin_uri"]})
+        largest_bin = collection.find({"bin_uri": l["bin_uri"]})
 
-    # "finland": {
-    #                "latitude": 61.9241,
-    #                "longitude": 25.7482,
-    #                "text": {
-    #                    "position": "left",
-    #                    "content": "Finland"
-    #                },
-    #                "href": "http://en.wikipedia.org/w/index.php?search=Finland"
-    #            },
+        # "finland": {
+        #                "latitude": 61.9241,
+        #                "longitude": 25.7482,
+        #                "text": {
+        #                    "position": "left",
+        #                    "content": "Finland"
+        #                },
+        #                "href": "http://en.wikipedia.org/w/index.php?search=Finland"
+        #            },
 
-    r = {
-        "latitude"
-    }
+        r = {
+            "latitude"
+        }
