@@ -15,6 +15,10 @@ def hello_world():
 def map_locations():
     return render_template('map-locations.html')
 
+@app.route('/map_species')
+def map_species():
+    return render_template('map-species.html')
+
 @app.route('/get_mosquitos')
 def mosquitos():
     response = urllib2.urlopen('http://www.boldsystems.org/index.php/API_Public/combined?bin=BOLD:AAA5125&format=xml')
