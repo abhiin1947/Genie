@@ -3,7 +3,9 @@ from flask import render_template
 from flask import jsonify
 import urllib2
 import xmltodict
+import difflib
 from pymongo import MongoClient
+from bson.json_util import dumps
 
 app = Flask(__name__)
 
@@ -58,6 +60,7 @@ def get_plots():
     for x in largest_bin:
         if "collection_event" in x and "coordinates" in x["collection_event"] and "specimen_identifiers" in x and "catalognum" in x["specimen_identifiers"]:
             r = {
+                "id": x["_id"],
                 "latitude": float(x["collection_event"]["coordinates"]["lat"]),
                 "longitude": float(x["collection_event"]["coordinates"]["lon"]),
                 "text": {
@@ -69,6 +72,12 @@ def get_plots():
             abc.append(r)
 
     return jsonify({"plots": abc})
+
+
+@app.route('/relatives/<id>')
+def get_relatives(id):
+    r = {}
+    #difflib.get_close_matches(userEmpName, employeeNames, 1)
 
 
 if __name__ == '__main__':
