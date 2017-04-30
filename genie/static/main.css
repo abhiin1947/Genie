@@ -27,6 +27,10 @@ html {
     font-family: 'Playfair Display', serif;
 }
 
+.gr {
+   color: #CEE182;
+}
+
 .green {
     background-color: #CEE182;
     border: 1px solid #CEE182;
@@ -52,6 +56,10 @@ html {
     height: 100vh;
     width: 100vw;
 }
+.l {
+    font-family: 'Lora', serif;
+
+}
 
 a:focus {
     outline: 0;
@@ -64,4 +72,8 @@ btn:focus {
 .container {
     display: block;
     margin: 0 auto;
+}
+
+.width {
+    width: 100vw;
 }
