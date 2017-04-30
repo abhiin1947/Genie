@@ -77,3 +77,11 @@ btn:focus {
 .width {
     width: 100vw;
 }
+
+.h {
+    max-height: 50px;
+}
+
+.white {
+    color: #fff;
+}
