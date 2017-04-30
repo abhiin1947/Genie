@@ -93,7 +93,7 @@ def get_relatives(count, ido):
                 n.append(record["sequences"]["sequence"]["nucleotides"])
 
         c_neus = []
-        for closest in difflib.get_close_matches(c["sequences"]["sequence"]["nucleotides"], n, count):
+        for closest in difflib.get_close_matches(c["sequences"]["sequence"]["nucleotides"], n, count, cutoff=0.4):
             c_neu = find_by_nucleotide(closest)
             c_neus.append(dict_record(c_neu))
 

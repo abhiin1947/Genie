@@ -18,11 +18,18 @@
     <script type="text/javascript">
         var plots = {};
         var customIcon = {};
+        var customIcon2 = {};
         var markers = [];
+        var map;
         function initMap() {
             customIcon = {
                 url: "static/dna-01.png",
-                scaledSize: new google.maps.Size(40, 40)
+                scaledSize: new google.maps.Size(60, 60)
+            };
+
+            customIcon2 = {
+                url: "static/dna-02.png",
+                scaledSize: new google.maps.Size(60, 60)
             };
 
             google.maps.Map.prototype.clearOverlays = function () {
@@ -32,12 +39,11 @@
                 markers.length = 0;
             };
             $.getJSON("/plots", function (data) {
-                var map = new google.maps.Map(document.getElementById('map'), {
+                map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 0, lng: 0},
                     zoom: 2,
                     minZoom: 2,
-                    maxZoom: 4,
-                    gestureHandling: "none",
+                    maxZoom: 8,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     disableDefaultUI: true,
                     styles: [
@@ -219,7 +225,7 @@
 
                 function showCustomMarker(value) {
                     var m = new google.maps.Marker({
-                        icon: customIcon,
+                        icon: customIcon2,
                         position: {lat: value["latitude"], lng: value["longitude"]},
                         map: map,
                         title: value["text"]["content"]
@@ -243,6 +249,7 @@
             });
 
             $("#reset").click(function () {
+                console.log("Clicked");
                 map.clearOverlays();
 
                 initMap();
