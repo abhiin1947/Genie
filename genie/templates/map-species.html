@@ -17,13 +17,18 @@
 
     <script type="text/javascript">
         var plots = {};
+        var customIcon = {};
         function initMap() {
+            customIcon = {
+                url: "static/dna-01.png",
+                scaledSize: new google.maps.Size(20, 20)
+            };
             $.getJSON("/plots", function (data) {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 0, lng: 0},
                     zoom: 2,
                     minZoom: 2,
-                    maxZoom: 2,
+                    maxZoom: 4,
                     gestureHandling: "none",
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     disableDefaultUI: true,
@@ -364,8 +369,10 @@
                     ]
                 });
 
+
                 $.each(data["plots"], function (index, value) {
                     var marker = new google.maps.Marker({
+						icon: customIcon,
                         position: {lat: value["latitude"], lng: value["longitude"]},
                         map: map,
                         title: value["text"]["content"]
@@ -380,29 +387,23 @@
                     });
                 });
             });
-
-
         }
     </script>
 </head>
 
-<body class="green">
+<body class="">
 <div class="island container">
     <!-- <a href="" id="zoom-northamerica">North America</a> <a href="" id="zoom-southamerica">South America</a> <a href="" id="zoom-europe">Europe</a> <a href="" id="zoom-asia">Asia</a> <a href="" id="zoom-africa">Africa</a>  <a href="" id="zoom-oceania">Oceania</a>-->
     <div>
         <h2 class="zetta text-center push-double"> Locate the species</h2>
     </div>
     <div class="world">
-        <div id="map" class="map"></div>
+        <div class="embed embed-4by3">
+            <div id="map" class="map embed-item absolute pin-c"></div>
+        </div>
     </div>
 </div>
 
-<div class="gutter-double ib">
-    <a class="circular-btn" href="map_locations"></a>
-</div>
-<div class="gutter-double ib">
-    <a class="circular-btn" href="map_species"></a>
-</div>
 
 </body>
 </html>
