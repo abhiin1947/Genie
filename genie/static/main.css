@@ -42,3 +42,8 @@ html {
 .ib {
     display: inline-block;
 }
+
+.map {
+    height: 1024px;
+    width: 1024px;
+}
