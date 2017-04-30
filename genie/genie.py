@@ -16,6 +16,10 @@ def hello_world():
 def map_locations():
     return render_template('map-locations.html')
 
+@app.route('/map_species')
+def map_species():
+    return render_template('map-species.html')
+
 
 @app.route('/get_mosquitos')
 def mosquitos():

@@ -26,3 +26,19 @@ html {
 .pf {
     font-family: 'Playfair Display', serif;
 }
+
+.green {
+    background-color: #CEE182;
+}
+
+.circular-btn {
+    display: inline-block;
+    background-color: #CEE182;
+    border: 10px solid #fff;
+    border-radius: 50%;
+    align-content: center;
+}
+
+.ib {
+    display: inline-block;
+}
